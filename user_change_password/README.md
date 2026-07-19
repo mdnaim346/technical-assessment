@@ -1,16 +1,40 @@
+# Odoo Technical Assessment
 
-# User Change Password
+This repository contains the solutions for the practical Odoo technical assessment,
+covering three custom modules built on Odoo 17.
 
-A small Odoo module that adds a "Change Password" item to the user profile dropdown and a simple wizard to change the current user's password.
+## Setup Instructions
 
-# Features
- - Adds a `Change Password` item to the profile menu (top-right).
- - Opens a modal wizard to enter current password, new password and confirmation.
- - Validates current password with Odoo internals and updates password securely.
+1. Clone this repository into your Odoo custom addons directory:
+   ```bash
+   git clone <repo-url> technical-assessment
+2. Add the folder to your addons_path in odoo.conf:
 
-# Installation
-1. Ensure the module folder is on `addons_path` (the module path here is `custom_betopia/technical-assessment`).
-2. Restart Odoo and update/install the module:
+   addons_path = addons,...,its_addons/technical-assessment,...
 
-```bash
-cd /d F:\odoo17 python odoo-bin -u user_change_password -d <your_database>
+3. Restart the Odoo server and update the apps list (Developer mode → Apps → Update Apps List).
+4. Install the relevant module(s) from the Apps menu.
+
+ ==> Task 2: Change Password (user_change_password)
+
+## Approach
+   * Adds a "Change Password" entry to the top-right user profile dropdown using Odoo's native user_menuitems JS registry (the same mechanism Odoo core uses for "Preferences" / "Log out"), so it integrates cleanly with the existing menu instead of patching templates.
+   * Clicking the option opens a change.password.wizard (TransientModel) as a modal, with Current Password / New Password / Confirm New Password fields.
+   * On submit, the wizard calls Odoo's own res.users.change_password(), which validates the current password and hashes the new one — no custom hashing or credential-checking logic was written.
+   * Changing the password invalidates the current session token; the wizard immediately redirects to /web/session/logout, forcing the user to log in again with the new password.
+   * An ir.rule restricts each wizard record to its own creator, so no user can read another user's in-flight password input via the ORM.
+
+
+## How to Test
+
+1. Install the User Change Password module.
+2. Click the user avatar (top-right) → Change Password.
+3. Try a wrong current password → should show an access error.
+4. Try mismatched new/confirm passwords → should show a validation error.
+5. Enter correct current password + matching new/confirm → on submit, you should be logged out immediately and redirected to the login page. Log back in with the new password to confirm the change persisted.
+
+==> Task 1: Automatic Payment Reconciliation (account_so_reconciliation)
+(to be documented once implemented)
+
+==> Task 3: Dynamic Employee Letter Generation Wizard (employee_letter_wizard)
+(to be documented once implemented)
