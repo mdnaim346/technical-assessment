@@ -73,7 +73,22 @@
     </template>
 
     <template id="letter_body_promotion">
-        <t t-call="employee_letter_wizard.letter_layout"/>
+        <t t-call="employee_letter_wizard.letter_layout">
+            <p>Date: <span t-out="context_timestamp(datetime.datetime.now()).strftime('%d-%m-%Y')"/></p>
+            <p>Dear <span t-out="employee.name"/>,</p>
+            <p>
+                Congratulations! In recognition of your contribution and performance, you have
+                been promoted to <b t-out="employee.job_title or employee.job_id.name"/>
+                in the <b t-out="employee.department_id.name"/> department at
+                <span t-out="company.name"/>, effective
+                <span t-out="context_timestamp(datetime.datetime.now()).strftime('%d-%m-%Y')"/>.
+            </p>
+            <p>
+                This promotion reflects the confidence we have in your abilities. We look
+                forward to your continued success in this new role.
+            </p>
+            <p>Sincerely,<br/><span t-out="company.name"/></p>
+        </t>
     </template>
 
     <template id="letter_body_resignation">
