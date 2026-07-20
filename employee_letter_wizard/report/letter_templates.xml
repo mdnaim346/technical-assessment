@@ -50,7 +50,26 @@
     </template>
 
     <template id="letter_body_joining">
-        <t t-call="employee_letter_wizard.letter_layout"/>
+        <t t-call="employee_letter_wizard.letter_layout">
+            <p>Date: <span t-out="context_timestamp(datetime.datetime.now()).strftime('%d-%m-%Y')"/></p>
+            <p>Dear <span t-out="employee.name"/>,</p>
+            <p>
+                Welcome to <span t-out="company.name"/>! This letter confirms your joining as
+                <b t-out="employee.job_title or employee.job_id.name"/>
+                in the <b t-out="employee.department_id.name"/> department, effective
+                <t t-if="joining_date">
+                    <span t-out="joining_date.strftime('%d-%m-%Y')"/>.
+                </t>
+                <t t-else="">
+                    from your start date.
+                </t>
+            </p>
+            <p>
+                Please report to your manager on your first day for onboarding and further
+                instructions. We are excited to have you on the team.
+            </p>
+            <p>Sincerely,<br/><span t-out="company.name"/></p>
+        </t>
     </template>
 
     <template id="letter_body_promotion">
