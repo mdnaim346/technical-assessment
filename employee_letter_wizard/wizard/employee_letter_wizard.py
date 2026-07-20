@@ -1,4 +1,5 @@
 from odoo import models, fields, api
+import datetime
 
 
 class EmployeeLetterWizard(models.TransientModel):
@@ -44,4 +45,5 @@ class EmployeeLetterWizard(models.TransientModel):
             'employee': employee,
             'company': employee.company_id,
             'joining_date': joining_date,
+            'datetime': datetime,
         }

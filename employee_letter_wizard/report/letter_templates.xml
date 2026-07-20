@@ -18,7 +18,7 @@
         </div>
 
         <div class="letter-footer" style="margin-top:40px; font-size:11px; color:#777; border-top:1px solid #ddd; padding-top:10px;">
-            <span t-out="company.name"/> — Generated on <span t-out="context_timestamp(datetime.datetime.now()).strftime('%Y-%m-%d')"/>
+            <span t-out="company.name"/> — Generated on <span t-out="datetime.datetime.now().strftime('%Y-%m-%d')"/>
         </div>
     </div>
 </template>
@@ -27,7 +27,7 @@
     <!-- Per-type body templates: t-call the shared layout, fill in type-specific text -->
     <template id="letter_body_appointment">
         <t t-call="employee_letter_wizard.letter_layout">
-            <p>Date: <span t-out="context_timestamp(datetime.datetime.now()).strftime('%d-%m-%Y')"/></p>
+            <p>Date: <span t-out="datetime.datetime.now().strftime('%d-%m-%Y')"/></p>
             <p>Dear <span t-out="employee.name"/>,</p>
             <p>
                 We are pleased to appoint you as
@@ -51,7 +51,7 @@
 
     <template id="letter_body_joining">
         <t t-call="employee_letter_wizard.letter_layout">
-            <p>Date: <span t-out="context_timestamp(datetime.datetime.now()).strftime('%d-%m-%Y')"/></p>
+            <p>Date: <span t-out="datetime.datetime.now().strftime('%d-%m-%Y')"/></p>
             <p>Dear <span t-out="employee.name"/>,</p>
             <p>
                 Welcome to <span t-out="company.name"/>! This letter confirms your joining as
@@ -74,14 +74,14 @@
 
     <template id="letter_body_promotion">
         <t t-call="employee_letter_wizard.letter_layout">
-            <p>Date: <span t-out="context_timestamp(datetime.datetime.now()).strftime('%d-%m-%Y')"/></p>
+            <p>Date: <span t-out="datetime.datetime.now().strftime('%d-%m-%Y')"/></p>
             <p>Dear <span t-out="employee.name"/>,</p>
             <p>
                 Congratulations! In recognition of your contribution and performance, you have
                 been promoted to <b t-out="employee.job_title or employee.job_id.name"/>
                 in the <b t-out="employee.department_id.name"/> department at
                 <span t-out="company.name"/>, effective
-                <span t-out="context_timestamp(datetime.datetime.now()).strftime('%d-%m-%Y')"/>.
+                <span t-out="datetime.datetime.now().strftime('%d-%m-%Y')"/>.
             </p>
             <p>
                 This promotion reflects the confidence we have in your abilities. We look
@@ -93,14 +93,14 @@
 
     <template id="letter_body_resignation">
         <t t-call="employee_letter_wizard.letter_layout">
-            <p>Date: <span t-out="context_timestamp(datetime.datetime.now()).strftime('%d-%m-%Y')"/></p>
+            <p>Date: <span t-out="datetime.datetime.now().strftime('%d-%m-%Y')"/></p>
             <p>Dear <span t-out="employee.name"/>,</p>
             <p>
                 This letter is to confirm the acceptance of your resignation from the position of
                 <b t-out="employee.job_title or employee.job_id.name"/>
                 in the <b t-out="employee.department_id.name"/> department at
                 <span t-out="company.name"/>, effective
-                <span t-out="context_timestamp(datetime.datetime.now()).strftime('%d-%m-%Y')"/>.
+                <span t-out="datetime.datetime.now().strftime('%d-%m-%Y')"/>.
             </p>
             <p>
                 We thank you for your contributions during your time with us and wish you

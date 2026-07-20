@@ -38,4 +38,13 @@ Adds "Change Password" to the user profile dropdown (same `user_menuitems` regis
 
 ## Task 3: Employee Letter Wizard (`employee_letter_wizard`)
 
-TODO
+Dynamic wizard to generate formatted employee letters (Appointment, Joining, Promotion, Resignation). Uses QWeb templates with employee data (name, job title, department, company, joining date). Auto-populates letter content when employee and letter type are selected. Renders as HTML in the wizard for editing, then exports to PDF.
+
+**Features:**
+- Four letter templates (appointment, joining, promotion, resignation)
+- Auto-population from employee contract/HR data
+- HTML editor for customization before export
+- PDF generation with company letterhead
+- Accessible from HR module menu → Employee Tools
+
+**Test:** HR → Employee Tools → Generate Employee Letter. Select employee and letter type. Verify HTML populates with employee details. Click "Generate PDF" to export.

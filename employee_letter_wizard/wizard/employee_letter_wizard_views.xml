@@ -24,4 +24,13 @@
         <field name="view_mode">form</field>
         <field name="target">new</field>
     </record>
+
+    <!-- Menu item under HR module -->
+    <menuitem
+        id="menu_employee_letter_wizard"
+        name="Generate Employee Letter"
+        action="action_employee_letter_wizard"
+        parent="hr.menu_hr_employee_tools"
+        sequence="50"
+    />
 </odoo>
