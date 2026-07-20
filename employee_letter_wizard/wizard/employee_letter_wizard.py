@@ -19,6 +19,15 @@ class EmployeeLetterWizard(models.TransientModel):
         for wizard in self:
             if wizard.employee_id and wizard.letter_type:
                 wizard.letter_html = wizard._render_letter_body()
+
+    def action_generate_pdf(self):
+        self.ensure_one()
+        if not self.letter_html:
+            self.letter_html = self._render_letter_body()
+        report_action = self.env.ref('employee_letter_wizard.action_report_employee_letter')
+        if report_action:
+            return report_action.report_action(self)
+        return False
                 
     def _render_letter_body(self):
         self.ensure_one()

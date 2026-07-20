@@ -4,13 +4,13 @@
     'summary': 'Account SO Reconciliation',
     'description': 'Account SO Reconciliation',
     'author': 'Naim Reza',
-    'depends': ['account', 'sale'],
+    'depends': ['account', 'sale_management'],
     'data': [
        
     ],
    
     'installable': True,
-    'application': False,
+    'application': True,
     'license': 'LGPL-3',
 
 }

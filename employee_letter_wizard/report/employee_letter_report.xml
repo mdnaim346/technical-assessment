@@ -1,8 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <template id="report_employee_letter_document">
-        <t t-call="web.basic_layout">
-            <t t-out="doc.letter_html"/>
+   <template id="report_employee_letter_document">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="web.basic_layout">
+                    <t t-set="employee" t-value="doc.employee_id"/>
+                    <t t-set="company" t-value="doc.employee_id.company_id"/>
+                    <t t-call="employee_letter_wizard.letter_layout">
+                        <t t-out="doc.letter_html"/>
+                    </t>
+                </t>
+            </t>
         </t>
     </template>
 
