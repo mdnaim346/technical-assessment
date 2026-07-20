@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Shared layout used by every letter type -->
+    <template id="letter_layout">
+        <div class="letter-layout">
+            <t t-out="0"/>
+        </div>
+    </template>
+
+    <!-- Per-type body templates: t-call the shared layout, fill in type-specific text -->
+    <template id="letter_body_appointment">
+        <t t-call="employee_letter_wizard.letter_layout"/>
+    </template>
+
+    <template id="letter_body_joining">
+        <t t-call="employee_letter_wizard.letter_layout"/>
+    </template>
+
+    <template id="letter_body_promotion">
+        <t t-call="employee_letter_wizard.letter_layout"/>
+    </template>
+
+    <template id="letter_body_resignation">
+        <t t-call="employee_letter_wizard.letter_layout"/>
+    </template>
+</odoo>

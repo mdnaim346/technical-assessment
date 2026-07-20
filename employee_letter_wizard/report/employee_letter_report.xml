@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="report_employee_letter_document">
+        <t t-call="web.basic_layout">
+            <t t-out="doc.letter_html"/>
+        </t>
+    </template>
+
+    <record id="action_report_employee_letter" model="ir.actions.report">
+        <field name="name">Employee Letter</field>
+        <field name="model">employee.letter.wizard</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">employee_letter_wizard.report_employee_letter_document</field>
+        <field name="report_file">employee_letter_wizard.report_employee_letter_document</field>
+        <field name="print_report_name">'Employee Letter'</field>
+        <field name="binding_model_id" eval="False"/>
+    </record>
+</odoo>
