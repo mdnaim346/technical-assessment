@@ -27,7 +27,12 @@ class EmployeeLetterWizard(models.TransientModel):
     
     def _get_render_values(self):
         self.ensure_one()
+        employee = self.employee_id
+        joining_date = False
+        if 'contract_id' in employee._fields and employee.contract_id:
+            joining_date = employee.contract_id.date_start
         return {
-            'employee': self.employee_id,
-            'company': self.employee_id.company_id,
+            'employee': employee,
+            'company': employee.company_id,
+            'joining_date': joining_date,
         }
