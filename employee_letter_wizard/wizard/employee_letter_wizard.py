@@ -13,3 +13,21 @@ class EmployeeLetterWizard(models.TransientModel):
         ('resignation', 'Resignation Letter'),
     ], string='Letter Type', required=True)
     letter_html = fields.Html(string='Letter Content', sanitize=True)
+
+    @api.onchange('employee_id', 'letter_type')
+    def _onchange_generate_content(self):
+        for wizard in self:
+            if wizard.employee_id and wizard.letter_type:
+                wizard.letter_html = wizard._render_letter_body()
+                
+    def _render_letter_body(self):
+        self.ensure_one()
+        xmlid = f'employee_letter_wizard.letter_body_{self.letter_type}'
+        return self.env['ir.qweb']._render(xmlid, self._get_render_values())
+    
+    def _get_render_values(self):
+        self.ensure_one()
+        return {
+            'employee': self.employee_id,
+            'company': self.employee_id.company_id,
+        }
