@@ -43,7 +43,12 @@ class AccountMove(models.Model):
         tokens = re.findall(r'\S+', label)
         if not tokens:
             return self.env['sale.order']
-        return self.env['sale.order'].search([('name', 'in', tokens)], limit=1)
+        matches = self.env['sale.order'].search([('name', 'in', tokens)])
+        distinct_names = set(matches.mapped('name'))
+        
+        if len(distinct_names) > 1:
+            return self.env['sale.order']
+        return matches[:1]
 
     def _reconcile_with_sale_order_invoices(self, payable_lines, sale_order):
         invoices = sale_order.invoice_ids.filtered(lambda m: m.state == 'posted')
