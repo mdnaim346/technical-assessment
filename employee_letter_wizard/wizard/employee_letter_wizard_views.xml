@@ -30,7 +30,7 @@
         id="menu_employee_letter_wizard"
         name="Generate Employee Letter"
         action="action_employee_letter_wizard"
-        parent="hr.menu_hr_employee_tools"
+        parent="hr.menu_hr_root"
         sequence="50"
     />
 </odoo>
